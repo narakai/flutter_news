@@ -10,6 +10,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   json_serializable: ^0.5.0
   build_runner: ^0.8.7
+  english_words: ^3.1.0
 
 dev_dependencies:
   flutter_test:
