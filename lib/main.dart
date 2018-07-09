@@ -117,16 +117,23 @@ class RandomWordsState extends State<RandomWords> {
     final alreadySaved = _saved.contains(pair);
     return new ListTile(
       title: new Text(pair.asPascalCase, style: _biggerFont),
-      trailing: new Icon(alreadySaved ? Icons.favorite : Icons.favorite_border,
-          color: alreadySaved ? Colors.red : null),
+      trailing: new IconButton(
+        icon: (alreadySaved
+            ? new Icon(Icons.favorite)
+            : new Icon(Icons.favorite_border)),
+        color: alreadySaved ? Colors.red : null,
+        onPressed: () {
+          setState(() {
+            if (alreadySaved) {
+              _saved.remove(pair);
+            } else {
+              _saved.add(pair);
+            }
+          });
+        },
+      ),
       onTap: () {
-        setState(() {
-          if (alreadySaved) {
-            _saved.remove(pair);
-          } else {
-            _saved.add(pair);
-          }
-        });
+        _pushSaved();
       },
       onLongPress: () {
         print("Long pressed");
