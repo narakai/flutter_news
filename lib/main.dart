@@ -59,9 +59,44 @@ class RandomWordsState extends State<RandomWords> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('List Demo'),
+        actions: <Widget>[
+          new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved)
+        ],
       ),
       body: _buildSuggestions(),
     );
+  }
+
+  void _pushSaved() {
+    Navigator.of(context).push(new MaterialPageRoute(
+        // builder 返回一个 widget
+        builder: (context) {
+      //这里使用map循环生成 tiles
+      final tiles = _saved.map(
+        (pair) {
+          return new ListTile(
+            title: new Text(
+              pair.asPascalCase,
+              style: _biggerFont,
+            ),
+          );
+        },
+      );
+      // 添加水平间距，并转换成list
+      final divided = ListTile
+          .divideTiles(
+            context: context,
+            tiles: tiles,
+          )
+          .toList();
+      //最终返回一个 ListView widget
+      return new Scaffold(
+        appBar: new AppBar(
+          title: new Text('Saved Suggestions'),
+        ),
+        body: new ListView(children: divided),
+      );
+    }));
   }
 
   Widget _buildSuggestions() {
