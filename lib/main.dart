@@ -36,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text(widget.title),
       ),
       body: new Center(
+        //页面内容
         child: new RandomWords(),
       ),
     );
